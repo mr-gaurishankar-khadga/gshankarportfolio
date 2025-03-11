@@ -1,0 +1,671 @@
+:root {
+  --bg-color: #050505;
+  --text-color: #ffffff;
+  --accent-color: #00FFAA;
+  --secondary-color: #111111;
+  --glow-color: rgba(0, 255, 170, 0.5);
+  --purple-glow: rgba(98, 0, 255, 0.4);
+  --pink-glow: rgba(255, 0, 128, 0.3);
+}
+
+.skill-section-container {
+  position: relative;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 4rem 12rem;
+  min-height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+  transition: opacity 0.3s ease;
+  width: 100%;
+}
+
+.skill-section-loading {
+  opacity: 0;
+}
+
+.skill-section-noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skill-section-cosmic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.skill-section-cosmic::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: float 15s ease-in-out infinite;
+}
+
+.skill-section-cosmic::after {
+  content: "";
+  position: absolute;
+  bottom: -10%;
+  left: -10%;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: float 20s ease-in-out infinite alternate;
+}
+
+.parallax-floating-icon {
+  position: absolute;
+  z-index: 1;
+  transition: transform 0.1s ease-out;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.parallax-icon-1 {
+  top: 15%;
+  left: 10%;
+  width: 6rem;
+  height: 6rem;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+.parallax-icon-2 {
+  top: 65%;
+  right: 10%;
+  width: 8rem;
+  height: 8rem;
+  background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.parallax-icon-3 {
+  bottom: 20%;
+  left: 20%;
+  width: 5rem;
+  height: 5rem;
+  background: radial-gradient(circle, var(--pink-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+.parallax-icon-4 {
+  top: 40%;
+  right: 25%;
+  width: 4rem;
+  height: 4rem;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(12px);
+}
+
+.skill-section-content {
+  position: relative;
+  z-index: 2;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+}
+
+.skill-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.skill-section-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.skill-section-accent-text {
+  color: var(--accent-color);
+  position: relative;
+}
+
+.skill-section-accent-text::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent-color);
+  box-shadow: 0 0 10px var(--glow-color);
+  animation: pulse 2s infinite;
+}
+
+.skill-section-underline {
+  height: 3px;
+  width: 80px;
+  margin: 0.5rem auto 1.5rem;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.skill-section-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.skill-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.skill-section-category {
+  background-color: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+  animation: fadeScale 0.8s ease-out forwards;
+}
+
+.skill-section-category:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 15px var(--glow-color);
+  transform: translateY(-5px);
+}
+
+.skill-section-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.skill-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.skill-section-item {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+.skill-section-animated {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s forwards;
+  animation-delay: 0.2s;
+}
+
+.animated-skill-section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s forwards;
+}
+
+.skill-section-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.skill-section-name {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Percentage counter effect using CSS only */
+.skill-section-percentage {
+  color: var(--accent-color);
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  visibility: hidden; /* Hide the original percentage text */
+}
+
+/* Create counter animation using pseudo elements */
+.skill-section-percentage::before {
+  content: "0%";
+  visibility: visible;
+  position: absolute;
+  right: 0;
+  animation: countNumber 2s forwards;
+  animation-delay: 0.7s;
+}
+
+/* Different animations for different percentage ranges */
+.skill-section-item:nth-child(1) .skill-section-percentage::before {
+  animation-name: countNumber90;
+}
+
+.skill-section-item:nth-child(2) .skill-section-percentage::before {
+  animation-name: countNumber80;
+}
+
+.skill-section-item:nth-child(3) .skill-section-percentage::before {
+  animation-name: countNumber85;
+}
+
+.skill-section-item:nth-child(4) .skill-section-percentage::before {
+  animation-name: countNumber75;
+}
+
+.skill-section-item:nth-child(5) .skill-section-percentage::before {
+  animation-name: countNumber95;
+}
+
+.skill-section-item:nth-child(6) .skill-section-percentage::before {
+  animation-name: countNumber70;
+}
+
+.skill-section-bar-bg {
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-section-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), #00ffdd);
+  border-radius: 4px;
+  width: 0; /* Start at 0% width */
+  box-shadow: 0 0 10px var(--glow-color);
+  position: relative;
+  overflow: hidden;
+  animation: progressStart 0.1s forwards, progressWait 0.6s forwards;
+  animation-delay: 0s, 0.7s;
+}
+
+/* Different width animations for different skill items */
+.skill-section-item:nth-child(1) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo90 1.5s forwards;
+  animation-delay: 0s, 0.7s;
+}
+
+.skill-section-item:nth-child(2) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo80 1.5s forwards;
+  animation-delay: 0s, 0.8s;
+}
+
+.skill-section-item:nth-child(3) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo85 1.5s forwards;
+  animation-delay: 0s, 0.9s;
+}
+
+.skill-section-item:nth-child(4) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo75 1.5s forwards;
+  animation-delay: 0s, 1s;
+}
+
+.skill-section-item:nth-child(5) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo95 1.5s forwards;
+  animation-delay: 0s, 1.1s;
+}
+
+.skill-section-item:nth-child(6) .skill-section-bar-fill {
+  animation: progressStart 0.1s forwards, progressTo70 1.5s forwards;
+  animation-delay: 0s, 1.2s;
+}
+
+.skill-section-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+  animation-delay: 1.5s;
+}
+
+.skill-section-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: max-content;
+  max-width: 250px;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-section-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: var(--secondary-color);
+}
+
+/* Delay animation for each skill item */
+.skill-section-item:nth-child(1) { animation-delay: 0.1s; }
+.skill-section-item:nth-child(2) { animation-delay: 0.2s; }
+.skill-section-item:nth-child(3) { animation-delay: 0.3s; }
+.skill-section-item:nth-child(4) { animation-delay: 0.4s; }
+.skill-section-item:nth-child(5) { animation-delay: 0.5s; }
+.skill-section-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Animations for various percentage values */
+@keyframes countNumber70 {
+  0% { content: "0%"; }
+  20% { content: "14%"; }
+  40% { content: "28%"; }
+  60% { content: "42%"; }
+  80% { content: "56%"; }
+  100% { content: "70%"; }
+}
+
+@keyframes countNumber75 {
+  0% { content: "0%"; }
+  20% { content: "15%"; }
+  40% { content: "30%"; }
+  60% { content: "45%"; }
+  80% { content: "60%"; }
+  100% { content: "75%"; }
+}
+
+@keyframes countNumber80 {
+  0% { content: "0%"; }
+  20% { content: "16%"; }
+  40% { content: "32%"; }
+  60% { content: "48%"; }
+  80% { content: "64%"; }
+  100% { content: "80%"; }
+}
+
+@keyframes countNumber85 {
+  0% { content: "0%"; }
+  20% { content: "17%"; }
+  40% { content: "34%"; }
+  60% { content: "51%"; }
+  80% { content: "68%"; }
+  100% { content: "85%"; }
+}
+
+@keyframes countNumber90 {
+  0% { content: "0%"; }
+  20% { content: "18%"; }
+  40% { content: "36%"; }
+  60% { content: "54%"; }
+  80% { content: "72%"; }
+  100% { content: "90%"; }
+}
+
+@keyframes countNumber95 {
+  0% { content: "0%"; }
+  20% { content: "19%"; }
+  40% { content: "38%"; }
+  60% { content: "57%"; }
+  80% { content: "76%"; }
+  100% { content: "95%"; }
+}
+
+/* Progress bar width animations */
+@keyframes progressStart {
+  to { width: 0%; }
+}
+
+@keyframes progressWait {
+  to { width: 0%; }
+}
+
+@keyframes progressTo70 {
+  0% { width: 0%; }
+  100% { width: 70%; }
+}
+
+@keyframes progressTo75 {
+  0% { width: 0%; }
+  100% { width: 75%; }
+}
+
+@keyframes progressTo80 {
+  0% { width: 0%; }
+  100% { width: 80%; }
+}
+
+@keyframes progressTo85 {
+  0% { width: 0%; }
+  100% { width: 85%; }
+}
+
+@keyframes progressTo90 {
+  0% { width: 0%; }
+  100% { width: 90%; }
+}
+
+@keyframes progressTo95 {
+  0% { width: 0%; }
+  100% { width: 95%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    box-shadow: 0 0 5px var(--glow-color);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 15px var(--glow-color);
+  }
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 5px var(--glow-color);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* New animation for category header glow */
+@keyframes headerGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px var(--glow-color);
+  }
+  50% {
+    text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color);
+  }
+}
+
+/* Apply header glow to category titles */
+.skill-section-category h3 {
+  animation: headerGlow 3s infinite;
+}
+
+@media (max-width: 768px) {
+  .skill-section-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skill-section-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .skill-section-container {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-section-bar-fill,
+  .skill-section-percentage::before {
+    animation: none !important;
+  }
+  
+  .skill-section-bar-fill {
+    width: 80%; /* Default fallback value */
+  }
+  
+  .skill-section-item:nth-child(1) .skill-section-bar-fill { width: 90%; }
+  .skill-section-item:nth-child(2) .skill-section-bar-fill { width: 80%; }
+  .skill-section-item:nth-child(3) .skill-section-bar-fill { width: 85%; }
+  .skill-section-item:nth-child(4) .skill-section-bar-fill { width: 75%; }
+  .skill-section-item:nth-child(5) .skill-section-bar-fill { width: 95%; }
+  .skill-section-item:nth-child(6) .skill-section-bar-fill { width: 70%; }
+  
+  .skill-section-item:nth-child(1) .skill-section-percentage::before { content: "90%"; }
+  .skill-section-item:nth-child(2) .skill-section-percentage::before { content: "80%"; }
+  .skill-section-item:nth-child(3) .skill-section-percentage::before { content: "85%"; }
+  .skill-section-item:nth-child(4) .skill-section-percentage::before { content: "75%"; }
+  .skill-section-item:nth-child(5) .skill-section-percentage::before { content: "95%"; }
+  .skill-section-item:nth-child(6) .skill-section-percentage::before { content: "70%"; }
+  
+  .skill-section-category,
+  .skill-section-item,
+  .parallax-floating-icon {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1;
+  }
+  
+  .skill-section-cosmic::before,
+  .skill-section-cosmic::after {
+    animation: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add these styles to your existing Skills.css file */
+
+.skill-section-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.skill-section-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-section-container.hidden {
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+}
+
+/* Optional: Add a nice fade effect for children elements */
+.skill-section-container.visible .skill-section-animated {
+  animation: fadeInUp 0.6s forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
